@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:writing_test/login.dart';
+import 'package:writing_test/pages/home.dart';
+import 'package:writing_test/pages/login.dart';
 import 'package:writing_test/main.dart';
 
 void main() {
@@ -28,7 +29,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-    expect(find.byType(MyHomePage), findsOneWidget);
+    expect(find.byType(HomePage), findsOneWidget);
 
     expect(find.text('0'), findsOneWidget);
 
