@@ -4,7 +4,6 @@ import 'package:writing_test/pages/home.dart';
 import 'package:writing_test/pages/login.dart';
 
 void main() {
-  setUp(() => null);
   group('Username and Password', () {
     testWidgets('LoginPage widget should contain username field',
         (WidgetTester tester) async {
@@ -34,7 +33,6 @@ void main() {
       expect(find.byType(ElevatedButton), findsOneWidget);
       
       await tester.tap(find.widgetWithText(ElevatedButton, "Giriş Yap"));
-
       await tester.pumpAndSettle(); // Ekran geçişini bekle
       
       expect(find.text("Hata"), findsOneWidget);
@@ -53,7 +51,6 @@ void main() {
 
       await tester
           .tap(find.widgetWithText(ElevatedButton, "Giriş Yap"));
-
       await tester.pumpAndSettle();
 
       expect(find.text("Hata"), findsOneWidget);
@@ -72,7 +69,6 @@ void main() {
 
       await tester
           .tap(find.widgetWithText(ElevatedButton, "Giriş Yap"));
-
       await tester.pumpAndSettle();
 
       expect(find.text("Hata"), findsOneWidget);
@@ -85,7 +81,7 @@ void main() {
       expect(find.byType(TextFormField), findsNWidgets(2));
 
       var username = find.widgetWithText(TextFormField, "username");
-      var password = find.widgetWithText(TextField, "password");
+      var password = find.widgetWithText(TextFormField, "password");
 
       await tester.enterText(username, "tugcekepen");
 
@@ -97,7 +93,6 @@ void main() {
 
       await tester
           .tap(find.widgetWithText(ElevatedButton, "Giriş Yap"));
-
       await tester.pumpAndSettle();
 
       expect(find.byType(HomePage), findsOneWidget);

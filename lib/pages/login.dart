@@ -87,21 +87,20 @@ class LoginPage extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Hata'),
-                              content: Text('Zorunlu alanları doldurun.'),
+                              title: const Text('Hata'),
+                              content: const Text('Zorunlu alanları doldurun.'),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('Tamam'),
+                                  child: const Text('Tamam'),
                                 ),
                               ],
                             );
                           },
                         );
                       }
-                      
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 5,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:writing_test/pages/list_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,8 +46,14 @@ class _HomePageState extends State<HomePage> {
               children: [
                 ElevatedButton(onPressed: _incrementCounter, child: const Icon(Icons.exposure_plus_1)),
                 ElevatedButton(onPressed: _decrementCounter, child: const Icon(Icons.exposure_minus_1))
-            ],)
-            
+            ],),
+            TextButton(onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListPage(),
+              ),);
+            }, child: const Text("Veri Listesi")),
           ],
         ),
       ),
