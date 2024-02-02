@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:writing_test/data/student.dart';
 
-class ListPage extends StatefulWidget {
-  const ListPage({super.key});
+class StudentsListPage extends StatefulWidget {
+  const StudentsListPage({super.key});
 
   @override
-  State<ListPage> createState() => _ListPageState();
+  State<StudentsListPage> createState() => _StudentsListPageState();
 }
 
-class _ListPageState extends State<ListPage> {
+class _StudentsListPageState extends State<StudentsListPage> {
   var studentList = students.map((e) => e);
 
   @override
@@ -16,6 +16,13 @@ class _ListPageState extends State<ListPage> {
     
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          key: const Key("list_page_back"),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Veriler"),
       ),

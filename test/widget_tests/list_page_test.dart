@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:writing_test/pages/home.dart';
-import 'package:writing_test/pages/list_page.dart';
+import 'package:writing_test/pages/students_list_page.dart';
 import 'package:writing_test/pages/login.dart';
 
 void main(){
@@ -30,7 +30,7 @@ void main(){
     await tester.tap(textButton);
     await tester.pumpAndSettle();
 
-    expect(find.byType(ListPage), findsOneWidget);
+    expect(find.byType(StudentsListPage), findsOneWidget);
   });
 
   testWidgets("ListPage should be contain ListTiles", (tester) async {
@@ -42,7 +42,7 @@ void main(){
     await tester.tap(textButton);
     await tester.pumpAndSettle();
 
-    expect(find.byType(ListPage), findsOneWidget);
+    expect(find.byType(StudentsListPage), findsOneWidget);
     expect(find.byType(ListTile), findsWidgets);
   });
 

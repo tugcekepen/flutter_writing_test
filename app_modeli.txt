@@ -1,0 +1,32 @@
+Student
+
+Adı
+Soyadı
+okul
+okul derecesi
+Sınıfı
+Dönemi
+ders listesi
+toplam ders sayısı
+gano
+
+
+
+School
+
+Okul adı
+Seviyesi
+Adres
+Öğrenci sayısı
+Dereceleri - "Ön Lisans", "Lisans", "Yüksek Lisans", "Doktora"
+Dönemleri - "Güz Dönemi", "Bahar Dönemi"
+
+
+
+Lesson
+
+Ders adı
+vize notu
+final notu
+Not
+Kredi
