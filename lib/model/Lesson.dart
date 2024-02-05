@@ -3,10 +3,12 @@ class Lesson{
   late int _credit;
   late double _firstExamPoint;
   late double _secondExamPoint;
-  late double _point;
 
-  Lesson(String name){
+  Lesson(String name) {
     _name = name;
+    _credit = 0;
+    _firstExamPoint = 0.0;
+    _secondExamPoint = 0.0;
   }
 
   String get name => _name;
@@ -15,7 +17,7 @@ class Lesson{
     if(value.length >= 2){
       _name = value;
     } else {
-      throw ArgumentError('Lesson name must be at least 2 characters long.');
+      throw ArgumentError('Ders adı en az 2 karakter olmalıdır.');
     }
   }
 
@@ -24,6 +26,8 @@ class Lesson{
   set credit(int value){
     if(value>0){
       _credit = value;
+    } else {
+      throw ArgumentError('Geçersiz kredi değeri.');
     }
   }
 
@@ -32,6 +36,8 @@ class Lesson{
   set firstExamPoint(double value){
     if(value>=0 && value<=100){
       _firstExamPoint = value;
+    } else {
+      throw ArgumentError('Geçersiz sınav puanı.');
     }
   }
 
@@ -40,14 +46,12 @@ class Lesson{
   set secondExamPoint(double value){
     if(value>=0 && value<=100){
       _secondExamPoint = value;
+    } else {
+      throw ArgumentError('Geçersiz sınav puanı.');
     }
   }
 
-  double get point => _point;
-
-  set point(double value){
-    if(value>=0 && value<=4){
-      _point = value;
-    }
+  double get point {
+    return (_firstExamPoint*0.4 + _secondExamPoint*0.6);
   }
 }

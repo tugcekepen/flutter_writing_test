@@ -3,8 +3,7 @@ import 'package:writing_test/model/School.dart';
 import 'Lesson.dart';
 
 class Student {
-  static const int _counter = 0;
-  static const int _totalCredit = 0;
+  static int _counter = 0;
   late int _id;
   late String _firstName;
   late String _lastName;
@@ -14,24 +13,28 @@ class Student {
   late String _period;
   late List<Lesson> _lessons;
   int get lessonCount => _lessons.length;
-  late double _gano;
+  double get gano => _calculateGano();
 
-  Student(String firstName, String lastName) {
-    _id = _counter + 1;
+  Student.withName(String firstName, String lastName) {
+    _id = ++_counter;
     _firstName = firstName;
     _lastName = lastName;
+    _school = School.withName("Samsun Üniversitesi");
+    _degree = "Lisans";
+    _schoolClass = 1;
+    _period = "Güz Dönemi";
+    _lessons = [];
   }
 
   Student.full(String firstName, String lastName, School school, String degree,
-      int schoolClass, String period, double gano, List<Lesson> lessons) {
-    _id = _counter + 1;
+      int schoolClass, String period, List<Lesson> lessons) {
+    _id = ++_counter;
     _firstName = firstName;
     _lastName = lastName;
     _school = school;
     _degree = degree;
     _schoolClass = schoolClass;
     _period = period;
-    _gano = gano;
     _lessons = lessons;
   }
 
@@ -43,7 +46,7 @@ class Student {
     if (_firstName.length >= 2) {
       _firstName = value;
     } else {
-      throw ArgumentError('First name must be at least 2 characters long.');
+      throw ArgumentError('Ad en az 2 karakter olmalıdır.');
     }
   }
 
@@ -53,55 +56,86 @@ class Student {
     if (_lastName.length >= 2) {
       _lastName = value;
     } else {
-      throw ArgumentError('Last name must be at least 2 characters long.');
+      throw ArgumentError('Soyad en az 2 karakter olmalıdır.');
     }
   }
 
   String get degree => _degree;
 
   set degree(String value) {
-    if (School().degrees.any((degree) => degree == value)) {
+    if (School.degrees.contains(value)) {
       _degree = value;
+    } else {
+      throw ArgumentError('Geçersiz derece.');
     }
   }
 
   int get schoolClass => _schoolClass;
 
   set schoolClass(int value) {
-    if (_schoolClass < 7 && _schoolClass > 0) {
-      _schoolClass = value;
+    if (value >= 0) {
+      if (_degree == "Ön Lisans") {
+        if (value >= 0 && value <= 4) {
+          _schoolClass = value;
+        } else {
+          throw ArgumentError('Geçersiz sınıf değeri.');
+        }
+      } else if (_degree == "Lisans") {
+        if (value >= 0 && value <= 7) {
+          _schoolClass = value;
+        } else {
+          throw ArgumentError('Geçersiz sınıf değeri.');
+        }
+      } else if (_degree == "Yüksek Lisans") {
+        if (value >= 0 && value <= 4) {
+          _schoolClass = value;
+        } else {
+          throw ArgumentError('Geçersiz sınıf değeri.');
+        }
+      } else if (_degree == "Doktora") {
+        if (value >= 0 && value <= 5) {
+          _schoolClass = value;
+        } else {
+          throw ArgumentError('Geçersiz sınıf değeri.');
+        }
+      } else {
+        throw ArgumentError('Geçersiz derece.');
+      }
+    } else {
+      throw ArgumentError('Geçersiz sınıf değeri.');
     }
   }
 
   String get period => _period;
 
   set period(String value) {
-    if (School().periods.any((period) => period == value)) {
+    if (School.periods.contains(value)) {
       _period = value;
-    }
-  }
-
-  double get gano => _gano;
-
-  set gano(double value) {
-    double total = 0;
-    if (_totalCredit > 0) {
-      for (Lesson lesson in _lessons){
-        total += lesson.point;
-      }
-      _gano = total / _totalCredit;
     } else {
-      _gano = 0.0;
+      throw ArgumentError('Geçersiz dönem.');
     }
   }
 
-  // int totalCredit(int totalCredit){
-  //   _totalCredit = totalCredit;
-  //   for (Lesson lesson in _lessons){
-  //     _totalCredit += lesson.credit;
-  //   };
-  //   return _totalCredit;
-  // }
+  double _calculateGano() {
+    double total = 0;
+    int totalCredit = 0;
+
+    for (Lesson lesson in _lessons) {
+      total += lesson.point * lesson.credit;
+      totalCredit += lesson.credit;
+    }
+
+    double gano = totalCredit > 0 ? (total / totalCredit) : 0.0;
+    return gano;
+  }
+
+  int get totalCredit {
+    int totalCredit = 0;
+    for (Lesson lesson in _lessons) {
+      totalCredit += lesson.credit;
+    }
+    return totalCredit;
+  }
 
   School get school => _school;
 
@@ -109,18 +143,24 @@ class Student {
     if (_school.toString().length >= 2) {
       _school = value;
     } else {
-      throw ArgumentError('First name must be at least 2 characters long.');
+      throw ArgumentError('Okul adı en az 2 karakter olmalıdır.');
     }
   }
 
   List<Lesson> get lessons => _lessons;
 
-  set lessons(List<Lesson> value) {
-    if (value.length >= 2 && value.length <= 10) {
-      _lessons = value;
+  void addLesson(Lesson lesson) {
+    if (_lessons.length < 10) {
+      _lessons.add(lesson);
+      _calculateGano();
     } else {
-      throw ArgumentError('Number of lessons must be between 2 and 10.');
+      throw ArgumentError("Ders sayısı 10'u geçemez.");
     }
+  }
+
+  void removeLesson(Lesson lesson) {
+    _lessons.remove(lesson);
+    _calculateGano();
   }
 
   @override
@@ -140,7 +180,7 @@ class Student {
   }
 
   String studentInfo() {
-    return "$_firstName $_lastName ${_school.name} $_degree $_schoolClass $_gano";
+    return "$_firstName $_lastName ${_school.name} $_degree $_schoolClass $gano";
   }
 
   String studentSchoolInfo() {
