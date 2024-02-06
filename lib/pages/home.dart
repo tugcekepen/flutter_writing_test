@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                child: const Text("Veri Listesi")),
+                child: const Text("Öğenciler")),
             TextButton(
                 onPressed: () {
                   Navigator.push(

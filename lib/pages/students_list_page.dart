@@ -24,7 +24,7 @@ class _StudentsListPageState extends State<StudentsListPage> {
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Veriler"),
+        title: const Text("Öğenciler"),
       ),
       body: ListView(
           children: [
