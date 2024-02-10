@@ -4,8 +4,9 @@ import 'package:writing_test/pages/home.dart';
 import 'package:writing_test/pages/students_list_page.dart';
 import 'package:writing_test/pages/login.dart';
 
-void main(){
-  Future<void> performLogin(WidgetTester tester, String username, String password) async {
+void main() {
+  Future<void> performLogin(
+      WidgetTester tester, String username, String password) async {
     var usernameWidget = find.widgetWithText(TextFormField, "username");
     var passwordWidget = find.widgetWithText(TextField, "password");
 
@@ -21,7 +22,7 @@ void main(){
     expect(find.byType(HomePage), findsOneWidget);
   }
 
-  Future<void> pushToListPage(WidgetTester tester ) async {
+  Future<void> pushToListPage(WidgetTester tester) async {
     var textButton = find.byType(TextButton);
 
     await tester.tap(textButton);
@@ -39,7 +40,9 @@ void main(){
 
   group("back icons from page to page", () {
     testWidgets("LoginPage <- HomePage", (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(home: LoginPage(),));
+      await tester.pumpWidget(MaterialApp(
+        home: LoginPage(),
+      ));
       await performLogin(tester, "aliyilmaz", "12345678");
 
       var backIcon = find.byKey(const Key("home_page_back"));
@@ -63,7 +66,4 @@ void main(){
       expect(find.byType(HomePage), findsOneWidget);
     });
   });
-
-
-  
 }
