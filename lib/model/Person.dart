@@ -1,6 +1,10 @@
 class Person {
-  final String name;
-  final int age;
+  late String name;
+  late int age;
 
-  Person({required this.name, required this.age});
+  Person();
+
+  Person.full(this.name, this.age);
+
+  String getUpperCaseName(String name) => name.toUpperCase();
 }
