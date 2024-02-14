@@ -13,7 +13,7 @@ class Student {
   late String _period;
   late List<Lesson> _lessons;
   int get lessonCount => _lessons.length;
-  double get gano => _calculateGano();
+  int get gano => _calculateGano();
 
   Student.withName(String firstName, String lastName) {
     _id = ++_counter;
@@ -116,7 +116,7 @@ class Student {
     }
   }
 
-  double _calculateGano() {
+  int _calculateGano() {
     double total = 0;
     int totalCredit = 0;
 
@@ -126,7 +126,7 @@ class Student {
     }
 
     double gano = totalCredit > 0 ? (total / totalCredit) : 0.0;
-    return gano;
+    return gano.round();
   }
 
   int get totalCredit {
@@ -149,22 +149,23 @@ class Student {
 
   List<Lesson> get lessons => _lessons;
 
-  void addLesson(Lesson lesson) {
+  List<Lesson> addLesson(Lesson lesson) {
     if (_lessons.length < 10) {
       _lessons.add(lesson);
       _calculateGano();
+      return _lessons;
     } else {
       throw ArgumentError("Ders sayısı 10'u geçemez.");
     }
   }
 
-  void removeLesson(Lesson lesson) {
+  List<Lesson> removeLesson(Lesson lesson) {
     _lessons.remove(lesson);
     _calculateGano();
+    return _lessons;
   }
 
-  @override
-  String toString() {
+  String fullName() {
     return "$_firstName $_lastName";
   }
 

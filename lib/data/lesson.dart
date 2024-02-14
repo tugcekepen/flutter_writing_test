@@ -1,14 +1,14 @@
 import 'package:writing_test/model/Lesson.dart';
 
-Lesson yapayZeka = Lesson('Yapay Zeka');
-Lesson veriYapilari = Lesson('Veri Yapıları');
-Lesson algoritma = Lesson('Algoritma');
-Lesson programlama = Lesson('Programlama');
-Lesson veritabani = Lesson('Veritabanı');
-Lesson webProgramlama = Lesson('Web Programlama');
-Lesson mobilProgramlama = Lesson('Mobil Programlama');
-Lesson oyunProgramlama = Lesson('Oyun Programlama');
-Lesson goruntuIsleme = Lesson('Görüntü İşleme');
+Lesson yapayZeka = Lesson.withName('Yapay Zeka');
+Lesson veriYapilari = Lesson.withName('Veri Yapıları');
+Lesson algoritma = Lesson.withName('Algoritma');
+Lesson programlama = Lesson.withName('Programlama');
+Lesson veritabani = Lesson.withName('Veritabanı');
+Lesson webProgramlama = Lesson.withName('Web Programlama');
+Lesson mobilProgramlama = Lesson.withName('Mobil Programlama');
+Lesson oyunProgramlama = Lesson.withName('Oyun Programlama');
+Lesson goruntuIsleme = Lesson.withName('Görüntü İşleme');
 
 List<Lesson> lessons = [
   yapayZeka,
