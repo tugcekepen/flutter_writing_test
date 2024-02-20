@@ -1,10 +1,11 @@
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:writing_test/model/School.dart';
 import 'Lesson.dart';
 
 class Student {
   static int _counter = 0;
-  late int _id;
+  late int id;
   late String _firstName;
   late String _lastName;
   late School _school;
@@ -16,7 +17,7 @@ class Student {
   double get gano => _calculateGano();
 
   Student.withName(String firstName, String lastName) {
-    _id = ++_counter;
+    id = ++_counter;
     _firstName = firstName;
     _lastName = lastName;
     _school = School.withName("Samsun Üniversitesi");
@@ -28,7 +29,7 @@ class Student {
 
   Student.full(String firstName, String lastName, School school, String degree,
       int schoolClass, String period, List<Lesson> lessons) {
-    _id = ++_counter;
+    id = ++_counter;
     _firstName = firstName;
     _lastName = lastName;
     _school = school;
@@ -37,8 +38,6 @@ class Student {
     _period = period;
     _lessons = lessons;
   }
-
-  int get id => _id;
 
   String get firstName => _firstName;
 
@@ -149,6 +148,15 @@ class Student {
 
   List<Lesson> get lessons => _lessons;
 
+  set lessons(List<Lesson> value) {
+    if (value.length <= 10) {
+      _lessons = value;
+      _calculateGano();
+    } else {
+      throw ArgumentError('Ders sayısı 10\'dan fazla olamaz.');
+    }
+  }
+
   void addLesson(Lesson lesson) {
     if (_lessons.length < 10) {
       _lessons.add(lesson);
@@ -163,8 +171,7 @@ class Student {
     _calculateGano();
   }
 
-  @override
-  String toString() {
+  String fullName() {
     return "$_firstName $_lastName";
   }
 

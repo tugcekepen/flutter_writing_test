@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class School {
   late String _name;
   String grade = "Üniversite";

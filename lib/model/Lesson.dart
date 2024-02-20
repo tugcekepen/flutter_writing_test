@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class Lesson{
   late String _name;
   late int _credit;

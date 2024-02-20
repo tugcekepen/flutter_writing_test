@@ -13,22 +13,16 @@ class MockPerson extends Mock implements Person {
 
 void main() {
   group('Person Test', () {
-    // late Person person;
+    test('Constructor should initialize fields correctly 1', () {
+      // Arrange
+      final person = Person.full('John', 30);
 
-    // setUp(() {
-    //   person = MockPerson();
-    // });
+      // Assert
+      expect(person.name, 'John');
+      expect(person.age, 30);
+    });
 
-    // test('Constructor should initialize fields correctly', () {
-    //   // Arrange
-    //   when(() => person.name).thenReturn('John');
-    //   when(() => person.age).thenReturn(30);
-
-    //   // Assert
-    //   expect(person.name, 'John'); expect(person.age, 30);
-    // });
-
-    test('Constructor should initialize fields correctly', () {
+    test('Constructor should initialize fields correctly 2', () {
       const String expectedName = 'John';
       const int expectedAge = 30;
       Person mockPerson = MockPerson.full(expectedName, expectedAge);
@@ -41,7 +35,7 @@ void main() {
       expect(mockPerson.age, 30);
     });
 
-    test('Constructor should initialize fields correctly', () {
+    test('Constructor should initialize fields correctly 3', () {
       Person mockPerson = MockPerson();
 
       when(() => mockPerson.name).thenReturn('John');

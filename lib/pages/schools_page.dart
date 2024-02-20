@@ -28,15 +28,14 @@ class _SchoolsPageState extends State<SchoolsPage> {
           child: Column(
             children: [
               const SizedBox(
-                      height: 10,
-                    ),
+                height: 10,
+              ),
               for (var school in schools)
                 Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: MenuItemButton(
-                        child: Text(school.name),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -47,9 +46,11 @@ class _SchoolsPageState extends State<SchoolsPage> {
                         style: MenuItemButton.styleFrom(
                           shape: const StadiumBorder(),
                           side: BorderSide(
-                              color: Theme.of(context).colorScheme.inversePrimary,
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
                               width: 2),
                         ),
+                        child: Text(school.name),
                       ),
                     ),
                     const SizedBox(

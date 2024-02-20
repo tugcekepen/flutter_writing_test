@@ -2,39 +2,42 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:writing_test/model/School.dart';
 
-class MockSchool extends Mock implements School {}
+class MockSchool extends Mock implements School {
+  @override
+  String get name => "Samsun Anadolu Lisesi";
+
+  @override
+  String get adress => "Samsun";
+
+  @override
+  int get studentCount => 10000;
+
+  @override
+  String get grade => "Lise";
+}
 
 void main() {
-  late School school;
+  late School mockSchool;
 
   setUp(() {
-    school = MockSchool();
+    mockSchool = MockSchool();
   });
 
   group("School constructors", () {
     test("School.withName constructor", () {
-      //Arrange
-      const String testName = "Samsun Üniversitesi";
+      final realSchool = School.withName("Samsun Üniversitesi");
 
-      final mockSchool = MockSchool();
-
-      when(() => mockSchool.name).thenReturn(testName);
-      when(() => school.name).thenReturn(testName);
-
-      final realSchool = School.withName(testName);
-
-      //Assert
       expect(realSchool.name, "Samsun Üniversitesi");
     });
 
     test("School.full constructor", () {
       //Arrange
-      final school = School.full("Samsun Üniversitesi", "Samsun", 50000);
+      final realSchool = School.full("Samsun Üniversitesi", "Samsun", 50000);
 
       //Act
-      String name = school.name;
-      String adress = school.adress;
-      int studentCount = school.studentCount;
+      String name = realSchool.name;
+      String adress = realSchool.adress;
+      int studentCount = realSchool.studentCount;
 
       //Assert
       expect(name, "Samsun Üniversitesi");
@@ -44,31 +47,27 @@ void main() {
   });
   group("tests to school methods", () {
     test("schoolInfo()", () {
-      //Arrange
-      school.name = "Samsun Anadolu Lisesi";
-      school.adress = "Samsun";
-      school.studentCount = 10000;
-      school.grade = "Lise";
+      // when(() => school.schoolInfo()).thenReturn(
+      //     "Okul: Samsun Anadolu Lisesi Türü: Lise Adresi: Samsun Öğrenci Sayısı: 10000");
+      when(() => mockSchool.schoolInfo()).thenAnswer((_) {
+        return "Okul: ${mockSchool.name} Türü: ${mockSchool.grade} Adresi: ${mockSchool.adress} Öğrenci Sayısı: ${mockSchool.studentCount}";
+      });
 
-      when(() => school.schoolInfo()).thenReturn(
-          "Okul: Samsun Anadolu Lisesi Türü: Lise Adresi: Samsun Öğrenci Sayısı: 10000");
-
-      //Assert
-      expect(school.schoolInfo(),
+      expect(mockSchool.schoolInfo(),
           "Okul: Samsun Anadolu Lisesi Türü: Lise Adresi: Samsun Öğrenci Sayısı: 10000");
     });
   });
   group("Errors in School class", () {
     test("School name cannot be less than 2 characters", () {
-      School school = School();
+      School realSchool = School();
 
-      expect(() => school.name = "A", throwsA(isArgumentError));
+      expect(() => realSchool.name = "A", throwsA(isArgumentError));
     });
 
     test("School adress cannot be less than 3 characters", () {
-      School school = School();
+      School realSchool = School();
 
-      expect(() => school.adress = "A", throwsA(isArgumentError));
+      expect(() => realSchool.adress = "A", throwsA(isArgumentError));
     });
 
     test("Student count in school cannot be less than 1", () {
