@@ -6,7 +6,13 @@ class Lesson{
   late double _firstExamPoint;
   late double _secondExamPoint;
 
-  Lesson(String name) {
+  Lesson(){
+    _credit = 0;
+    _firstExamPoint = 0.0;
+    _secondExamPoint = 0.0;
+  }
+
+  Lesson.withName(String name) {
     _name = name;
     _credit = 0;
     _firstExamPoint = 0.0;

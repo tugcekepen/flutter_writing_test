@@ -1,15 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:writing_test/model/Lesson.dart';
 import 'package:writing_test/model/Student.dart';
 import 'package:writing_test/model/School.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockStudent extends Mock implements Student {
   @override
   late List<Lesson> lessons;
   @override
-  void addLesson(Lesson lesson) {
+  List<Lesson> addLesson(Lesson lesson) {
     lessons.add(lesson);
+    return lessons;
   }
 }
 
@@ -17,9 +18,9 @@ void main() {
   late Student mockStudent;
 
   List<Lesson> lessons = [
-    Lesson("Görüntü İşleme"),
-    Lesson("Mobil Programlama"),
-    Lesson("Yapay Zeka")
+    Lesson.withName("Görüntü İşleme"),
+    Lesson.withName("Mobil Programlama"),
+    Lesson.withName("Yapay Zeka")
   ];
 
   lessons[0].credit = 3;
@@ -66,52 +67,68 @@ void main() {
     });
 
     test("addLesson() should add a lesson to the student's lessons", () {
-      mockStudent.addLesson(Lesson("Oyun Programlama"));
+      mockStudent.addLesson(Lesson.withName("Oyun Programlama"));
 
       expect(mockStudent.lessons.last.name, "Oyun Programlama");
     });
 
 //-------
 
-    test("removeLesson() should remove a lesson from the student's lessons",
+    // test("removeLesson() should remove a lesson from the student's lessons", () {
+    //   Student student = Student.withName("Ali", "Yılmaz");
+
+    //   //Act
+    //   when(() => mockStudent.addLesson(mockLesson)).thenAnswer((_) {
+    //     mockLessons.add(mockLesson);
+    //     return; // Stubbing a void method
+    //   });
+
+    //   mockStudent.addLesson(mockLesson);
+
+    //   //Assert
+    //   expect(mockLessons.first.name, "Mobil Programlama");
+    // });
+
+    test("removeLesson() should remove a lesson from the students's lessons",
         () {
-      Student student = Student.withName("Ali", "Yılmaz");
+      List<String> lessonNames = [
+        "Mobil Programlama",
+        "Yapay Zeka",
+        "Görüntü İşleme"
+      ];
 
-      student.addLesson(Lesson("Yapay Zeka"));
-      student.addLesson(Lesson("Mobil Programlama"));
-      student.addLesson(Lesson("Görüntü İşleme"));
+      for (int i = 0; i < lessonNames.length; i++) {
+        mockStudent.addLesson(Lesson.withName(lessonNames[i]));
+      }
 
-      var lessons = student.lessons;
+      expect(mockStudent.lessons.length, 3);
 
-      expect(lessons.length, 3);
+      //when(() => mockStudent.removeLesson(mockStudent.lessons.last)).thenReturn(mockStudent.lessons);
 
-      //student.removeLesson(Lesson("Mobil Programlama")); //Bu şekilde olmaz çünkü referanslar farklı olacak
-      student.removeLesson(student.lessons.last);
+      //mockStudent.removeLesson(Lesson("Mobil Programlama")); //Bu şekilde olmaz çünkü referanslar farklı olacak
+      final removedLesson = mockStudent.lessons.last;
+      mockStudent.removeLesson(removedLesson);
 
-      var lessonNames = lessons.map((e) => e.name).toList();
+      expect(mockStudent.lessons.contains(removedLesson), isFalse);
 
-      expect(lessons.length, 2);
-      expect(lessonNames.contains("Görüntü İşleme"), isFalse);
+      mockStudent.removeLesson(mockStudent.lessons.first);
+      mockStudent.removeLesson(mockStudent.lessons.first);
 
-      student.removeLesson(lessons.first);
-      student.removeLesson(lessons.first);
-
-      expect(lessons.length, 0);
-      expect(lessons, []);
+      expect(mockStudent.lessons, isEmpty);
     });
 
     test("studentSchoolInfo() with Student.full() constructor", () {
       //Arrange
       final school = School.withName("Ondokuz Mayıs Üniversitesi");
       List<Lesson> lessons = [
-        Lesson("Mobil Programlama"),
-        Lesson("Yapay Zeka")
+        Lesson.withName("Mobil Programlama"),
+        Lesson.withName("Yapay Zeka")
       ];
       final student = Student.full(
           "Zafer", "Dağ", school, "Ön Lisans", 3, "Bahar Dönemi", lessons);
 
       //Act
-      String studentSchoolInfo = student.studentSchoolInfo();
+      String studentSchoolInfo = mockStudent.studentSchoolInfo();
 
       //Assert
       expect(studentSchoolInfo, "Ondokuz Mayıs Üniversitesi Ön Lisans 3");
@@ -119,10 +136,10 @@ void main() {
 
     test("studentSchoolInfo() with Student.withName() constructor", () {
       //Arrange
-      final student = Student.withName("Tuğçe", "Kepen");
+      final mockStudent = Student.withName("Tuğçe", "Kepen");
 
       //Act
-      String studentSchoolInfo = student.studentSchoolInfo();
+      String studentSchoolInfo = mockStudent.studentSchoolInfo();
 
       //Assert
       expect(studentSchoolInfo, "Samsun Üniversitesi Lisans 1");
@@ -133,8 +150,8 @@ void main() {
         //Arrange
         final school = School.withName("Ondokuz Mayıs Üniversitesi");
         List<Lesson> lessons = [
-          Lesson("Mobil Programlama"),
-          Lesson("Yapay Zeka")
+          Lesson.withName("Mobil Programlama"),
+          Lesson.withName("Yapay Zeka")
         ];
         lessons[0].firstExamPoint = 80;
         lessons[0].secondExamPoint = 90;
@@ -146,42 +163,42 @@ void main() {
             "Zafer", "Dağ", school, "Ön Lisans", 3, "Bahar Dönemi", lessons);
 
         //Act
-        double gano = student.gano;
+        int gano = mockStudent.gano;
 
         //Assert
         expect(gano, 72.25);
       });
 
       test("if course grades are entered as 0", () {
-        var lesson1 = Lesson("Mobil Programlama");
+        var lesson1 = Lesson.withName("Mobil Programlama");
         lesson1.firstExamPoint = 0;
         lesson1.secondExamPoint = 0;
         lesson1.credit = 3;
 
-        var lesson2 = Lesson("Yapay Zeka");
+        var lesson2 = Lesson.withName("Yapay Zeka");
         lesson2.firstExamPoint = 0;
         lesson2.secondExamPoint = 0;
         lesson2.credit = 5;
 
-        var student = Student.withName("Zafer", "Dağ");
-        student.addLesson(lesson1);
-        student.addLesson(lesson2);
+        var mockStudent = Student.withName("Zafer", "Dağ");
+        mockStudent.addLesson(lesson1);
+        mockStudent.addLesson(lesson2);
 
-        expect(student.gano, 0);
+        expect(mockStudent.gano, 0);
       });
 
       test("if course grades are null/empty", () {
-        var lesson1 = Lesson("Mobil Programlama");
+        var lesson1 = Lesson.withName("Mobil Programlama");
         lesson1.credit = 3;
 
-        var lesson2 = Lesson("Yapay Zeka");
+        var lesson2 = Lesson.withName("Yapay Zeka");
         lesson2.credit = 5;
 
-        var student = Student.withName("Zafer", "Dağ");
-        student.addLesson(lesson1);
-        student.addLesson(lesson2);
+        var mockStudent = Student.withName("Zafer", "Dağ");
+        mockStudent.addLesson(lesson1);
+        mockStudent.addLesson(lesson2);
 
-        expect(student.gano,
+        expect(mockStudent.gano,
             isNotNull); // çünkü constructor'da sınav notları 0.0 olarak tanımlanmışken
       });
     });
