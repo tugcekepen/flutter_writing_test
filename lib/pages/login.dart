@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   validator: ((value) {
                     bool isTrue =
-                        students.any((student) => student.username() == value);
+                        students.any((student) => student.username == value);
                     if (value == null || value.isEmpty) {
                       return "Username cannot be left blank.";
                     } else if (!isTrue) {

@@ -35,7 +35,7 @@ class _StudentsListPageState extends State<StudentsListPage> {
                   focusColor: Colors.blueAccent,
                   enabled: true,
                   title: Text(student.toString()),
-                  subtitle: Text(student.username()),
+                  subtitle: Text(student.username),
                 ),
               ),
           ]

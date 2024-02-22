@@ -59,7 +59,5 @@ class Lesson{
     }
   }
 
-  double get point {
-    return (_firstExamPoint*0.4 + _secondExamPoint*0.6);
-  }
+  double get point => _firstExamPoint*0.4 + _secondExamPoint*0.6;
 }
