@@ -158,7 +158,6 @@ void main() {
       when(() => mockStudent.gano).thenReturn(75); // gano: 74,571'den 75 olmalı
 
       expect(student.gano, 75);
-    
     });
 
     test("studentInfo", () {
@@ -213,13 +212,17 @@ void main() {
         expect(student.lessons.length, equals(expectedLength));
       });
 
-      test("removeLesson() method should throw an error when there are no lessons left.", () {
+      test(
+          "removeLesson() method should throw an error when there are no lessons left.",
+          () {
         final mockLesson = createMockLesson("Mobil Programlama", 3, 80, 90);
 
         expect(() => student.removeLesson(mockLesson), throwsArgumentError);
       });
 
-      test("removeLesson() method should throw an error when trying to remove a lesson that the student doesn't have.", () {
+      test(
+          "removeLesson() method should throw an error when trying to remove a lesson that the student doesn't have.",
+          () {
         final mockLesson1 = createMockLesson("Mobil Programlama", 3, 80, 90);
         final mockLesson2 = createMockLesson("Yapay Zeka", 4, 60, 70);
 

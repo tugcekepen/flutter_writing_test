@@ -2,80 +2,75 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:writing_test/model/School.dart';
 
-class MockSchool extends Mock implements School {
-  @override
-  String get name => "Samsun Anadolu Lisesi";
-
-  @override
-  String get adress => "Samsun";
-
-  @override
-  int get studentCount => 10000;
-
-  @override
-  String get grade => "Lise";
-}
+class MockSchool extends Mock implements School {}
 
 void main() {
   late School mockSchool;
+  late School school;
+  late School schoolWithName;
 
   setUp(() {
     mockSchool = MockSchool();
+    school = School.full("Samsun Üniversitesi", "Samsun", 50000);
+    schoolWithName = School.withName("Samsun Üniversitesi");
   });
 
   group("School constructors", () {
     test("School.withName constructor", () {
-      final realSchool = School.withName("Samsun Üniversitesi");
+      final school = School.withName("Samsun Üniversitesi");
 
-      expect(realSchool.name, "Samsun Üniversitesi");
+      expect(school.name, "Samsun Üniversitesi");
     });
 
     test("School.full constructor", () {
       //Arrange
-      final realSchool = School.full("Samsun Üniversitesi", "Samsun", 50000);
+      final school = School.full("Samsun Üniversitesi", "Samsun", 50000);
 
       //Act
-      String name = realSchool.name;
-      String adress = realSchool.adress;
-      int studentCount = realSchool.studentCount;
+      String name = school.name;
+      String address = school.address;
+      int studentCount = school.studentCount;
 
       //Assert
       expect(name, "Samsun Üniversitesi");
-      expect(adress, "Samsun");
+      expect(address, "Samsun");
       expect(studentCount, isPositive);
     });
   });
-  group("tests to school methods", () {
-    test("schoolInfo()", () {
-      // when(() => school.schoolInfo()).thenReturn(
-      //     "Okul: Samsun Anadolu Lisesi Türü: Lise Adresi: Samsun Öğrenci Sayısı: 10000");
-      when(() => mockSchool.schoolInfo()).thenAnswer((_) {
-        return "Okul: ${mockSchool.name} Türü: ${mockSchool.grade} Adresi: ${mockSchool.adress} Öğrenci Sayısı: ${mockSchool.studentCount}";
-      });
 
-      expect(mockSchool.schoolInfo(),
-          "Okul: Samsun Anadolu Lisesi Türü: Lise Adresi: Samsun Öğrenci Sayısı: 10000");
+  group("tests to school methods", () {
+    test("schoolInfo - full ctr", () {
+      when(() => mockSchool.name).thenReturn("Samsun Üniversitesi");
+      when(() => mockSchool.type).thenReturn("Üniversite");
+      when(() => mockSchool.address).thenReturn("Samsun");
+      when(() => mockSchool.studentCount).thenReturn(1);
+
+      when(() => mockSchool.schoolInfo)
+          .thenReturn("Samsun Üniversitesi Üniversite Samsun 1");
+
+      expect(school.schoolInfo, "Samsun Üniversitesi, Üniversite, Samsun, 50000");
+    });
+
+    test("schoolInfo - withName ctr", () {
+      expect(schoolWithName.schoolInfo, "Samsun Üniversitesi, Üniversite, ---, 1");
     });
   });
+
   group("Errors in School class", () {
     test("School name cannot be less than 2 characters", () {
-      School realSchool = School();
-
-      expect(() => realSchool.name = "A", throwsA(isArgumentError));
+      expect(() => school.name = "", throwsA(isArgumentError));
+      expect(() => school.name = "A", throwsArgumentError);
     });
 
-    test("School adress cannot be less than 3 characters", () {
-      School realSchool = School();
-
-      expect(() => realSchool.adress = "A", throwsA(isArgumentError));
+    test("School address cannot be less than 3 characters", () {
+      expect(() => school.address = "", throwsA(isArgumentError));
+      expect(() => school.address = "A", throwsA(isArgumentError));
+      expect(() => school.address = "Ab", throwsArgumentError);
     });
 
     test("Student count in school cannot be less than 1", () {
-      School school = School.withName("Samsun Anadolu Lisesi");
-
-      expect(() => School.full("Test School", "City", 0),
-          throwsA(const TypeMatcher<ArgumentError>())); // Yol 1
-      expect(() => school.studentCount = 0, throwsA(isArgumentError)); // Yol 2
+      expect(() => school.studentCount = 0, throwsA(isArgumentError));
+      expect(() => school.studentCount = -1, throwsArgumentError);
     });
   });
 }

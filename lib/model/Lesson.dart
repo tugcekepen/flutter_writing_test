@@ -7,6 +7,7 @@ class Lesson{
   late double _secondExamPoint;
 
   Lesson(){
+    _name = "--";
     _credit = 0;
     _firstExamPoint = 0.0;
     _secondExamPoint = 0.0;
@@ -60,4 +61,6 @@ class Lesson{
   }
 
   double get point => _firstExamPoint*0.4 + _secondExamPoint*0.6;
+
+  String get lessonInfo => "Ders adı: $_name, Kredi: $_credit, 1. Sınav: $_firstExamPoint, 2. Sınav: $_secondExamPoint, Ortalama: ${point.toStringAsFixed(2)}";
 }
