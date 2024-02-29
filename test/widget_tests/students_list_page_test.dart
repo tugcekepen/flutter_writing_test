@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:writing_test/pages/home.dart';
-import 'package:writing_test/pages/students_list_page.dart';
-import 'package:writing_test/pages/login.dart';
+import 'package:writing_test/screens/home.dart';
+import 'package:writing_test/screens/students_list_page.dart';
+import 'package:writing_test/screens/login.dart';
 
 void main(){
   Future<void> performLogin(WidgetTester tester, String username, String password) async {

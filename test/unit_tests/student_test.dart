@@ -69,9 +69,9 @@ void main() {
       when(() => mockStudent.schoolClass).thenReturn(1);
 
       when(() => mockStudent.studentSchoolInfo)
-          .thenReturn("Samsun Üniversitesi Lisans 1");
+          .thenReturn("Okul Adı: Samsun Üniversitesi\nEğitim Düzeyi: Lisans\nSınıfı: 1");
 
-      expect(student.studentSchoolInfo, "Samsun Üniversitesi Lisans 1");
+      expect(student.studentSchoolInfo, "Okul Adı: Samsun Üniversitesi\nEğitim Düzeyi: Lisans\nSınıfı: 1");
     });
 
     group("addLesson()", () {
@@ -166,9 +166,9 @@ void main() {
       student.addLesson(mockLesson);
 
       when(() => mockStudent.studentInfo)
-          .thenReturn("Ali Yılmaz Samsun Üniversitesi Lisans 1 86");
+          .thenReturn("Adı: Ali\nSoyadı: Yılmaz\nOkul Adı: Samsun Üniversitesi\nEğitim Düzeyi: Lisans\nSınıfı: 1\nGano: 86");
 
-      expect(student.studentInfo, "Ali Yılmaz Samsun Üniversitesi Lisans 1 86");
+      expect(student.studentInfo, "Adı: Ali\nSoyadı: Yılmaz\nOkul Adı: Samsun Üniversitesi\nEğitim Düzeyi: Lisans\nSınıfı: 1\nGano: 86");
     });
 
     test("lessonCount", () {

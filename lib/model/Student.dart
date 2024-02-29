@@ -37,9 +37,9 @@ class Student {
       .replaceAll('ö', 'o');
 
   String get studentInfo =>
-      '$name $surname ${school.name} $degree $schoolClass $gano';
+      'Adı: $name\nSoyadı: $surname\nOkul Adı: ${school.name}\nEğitim Düzeyi: $degree\nSınıfı: $schoolClass\nGano: $gano';
 
-  String get studentSchoolInfo => '${school.name} $degree $schoolClass';
+  String get studentSchoolInfo => 'Okul Adı: ${school.name}\nEğitim Düzeyi: $degree\nSınıfı: $schoolClass';
 
   int get lessonCount => lessons.length;
 

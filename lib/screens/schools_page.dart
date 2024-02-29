@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:writing_test/pages/school_detail_page.dart';
+import 'package:writing_test/screens/school_detail_page.dart';
 import '../data/school.dart';
 
 class SchoolsPage extends StatefulWidget {

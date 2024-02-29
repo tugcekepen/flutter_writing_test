@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:writing_test/pages/home.dart';
-import 'package:writing_test/pages/login.dart';
+import 'package:writing_test/screens/home.dart';
+import 'package:writing_test/screens/login.dart';
 
 void main() {
   group('Username and Password', () {

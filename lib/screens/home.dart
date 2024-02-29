@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:writing_test/pages/schools_page.dart';
-import 'package:writing_test/pages/students_list_page.dart';
+import 'package:writing_test/screens/schools_page.dart';
+import 'package:writing_test/screens/students_list_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
