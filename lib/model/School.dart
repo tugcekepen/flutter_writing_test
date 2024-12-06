@@ -49,7 +49,7 @@ class School {
     if (name.length >= 2) {
       _name = name;
     } else {
-      throw ArgumentError('Okul adı en az 2 karakter olmalıdır.');
+      throw ArgumentError('Okul adı en az 2 karakter olmalıdır!');
     }
   }
 
@@ -57,7 +57,7 @@ class School {
     if (address.length >= 3) {
       _address = address;
     } else {
-      throw ArgumentError('Adres en az 3 karakter olmalıdır.');
+      throw ArgumentError('Adres en az 3 karakter olmalıdır!');
     }
   }
 
@@ -65,11 +65,9 @@ class School {
     if (studentCount > 0) {
       _studentCount = studentCount;
     } else {
-      throw ArgumentError('Geçersiz öğrenci sayısı.');
+      throw ArgumentError('Geçersiz öğrenci sayısı!');
     }
   }
 
   String get schoolInfo => "$name, $type, $address, $studentCount";
-  
 }
-

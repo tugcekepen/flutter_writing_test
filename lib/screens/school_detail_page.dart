@@ -7,7 +7,9 @@ class SchoolDetailPage extends StatefulWidget {
   const SchoolDetailPage({super.key, required this.school});
 
   @override
-  State<SchoolDetailPage> createState() => _SchoolDetailPage();
+  State<SchoolDetailPage> createState() {
+    return _SchoolDetailPage();
+  }
 }
 
 class _SchoolDetailPage extends State<SchoolDetailPage> {
@@ -35,10 +37,10 @@ class _SchoolDetailPage extends State<SchoolDetailPage> {
             )),
           ),
           const Divider(),
-          Text("Adres : ${widget.school.address}",
+          Text("Adres: ${widget.school.address}",
           textAlign: TextAlign.left,),
-          Text("Okul türü : ${widget.school.type}"),
-          Text("Öğrenci sayısı : ${widget.school.studentCount}"),
+          Text("Okul türü: ${widget.school.type}"),
+          Text("Öğrenci sayısı: ${widget.school.studentCount}"),
         ],
       ),
     );

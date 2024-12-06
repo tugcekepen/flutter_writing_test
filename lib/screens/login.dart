@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:writing_test/data/student.dart';
 import 'home.dart';
@@ -66,9 +64,9 @@ class LoginPage extends StatelessWidget {
                   maxLength: 8,
                   validator: ((value) {
                     if (value == null || value.isEmpty) {
-                      return "Password cannot be left blank.";
+                      return "Password cannot be left blank!";
                     } else if (value != "12345678") {
-                      return "Wrong password";
+                      return "Wrong password!";
                     }
                     return null;
                   }),

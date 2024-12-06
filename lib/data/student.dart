@@ -3,7 +3,7 @@ import 'package:writing_test/data/school.dart';
 import 'package:writing_test/model/School.dart';
 import 'package:writing_test/model/Student.dart';
 
-Student id_1 = Student.full("Tuğçe", "Kepen", schools[0], "Lisans", 3, School.periods[0],
+Student id_1 = Student.full("Tuğçe", "Başal", schools[0], "Lisans", 3, School.periods[0],
   [lessons[0], lessons[1], lessons[2], lessons[3], lessons[4], lessons[5]]);
 Student id_2 = Student.full("Ali", "Yılmaz", schools[2], "Lisans", 1, School.periods[0],
   [lessons[3], lessons[4], lessons[5], lessons[1]]);

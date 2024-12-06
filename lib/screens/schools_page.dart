@@ -6,7 +6,9 @@ class SchoolsPage extends StatefulWidget {
   const SchoolsPage({super.key});
 
   @override
-  State<SchoolsPage> createState() => _SchoolsPageState();
+  State<SchoolsPage> createState() {
+    return _SchoolsPageState();
+  }
 }
 
 class _SchoolsPageState extends State<SchoolsPage> {
@@ -28,13 +30,13 @@ class _SchoolsPageState extends State<SchoolsPage> {
           child: Column(
             children: [
               const SizedBox(
-                height: 10,
+                height: 12,
               ),
               for (var school in schools)
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: MenuItemButton(
                         onPressed: () {
                           Navigator.push(
@@ -44,7 +46,9 @@ class _SchoolsPageState extends State<SchoolsPage> {
                                       SchoolDetailPage(school: school)));
                         },
                         style: MenuItemButton.styleFrom(
-                          shape: const StadiumBorder(),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                           side: BorderSide(
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
@@ -54,7 +58,7 @@ class _SchoolsPageState extends State<SchoolsPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 12,
                     )
                   ],
                 ),

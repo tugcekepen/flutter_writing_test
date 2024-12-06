@@ -98,12 +98,12 @@ void main() {
           () {
         final mockLesson = createMockLesson("Mobil Programlama", 3, 80, 90);
 
-        // Öğrenciye 10 ders ekleyelim
+        // Öğrenciye 10 ders ekleye
         for (var i = 0; i < 10; i++) {
           student.addLesson(mockLesson);
         }
 
-        // 11. dersi eklemeye çalışalım, bunun bir ArgumentError fırlatması gerekiyor
+        // 11. dersi eklemeye çalış, bunun bir ArgumentError fırlatması gerekiyor
         expect(() => student.addLesson(mockLesson), throwsArgumentError);
       });
     });

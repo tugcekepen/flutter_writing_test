@@ -5,7 +5,9 @@ class StudentsListPage extends StatefulWidget {
   const StudentsListPage({super.key});
 
   @override
-  State<StudentsListPage> createState() => _StudentsListPageState();
+  State<StudentsListPage> createState() {
+    return _StudentsListPageState();
+  }
 }
 
 class _StudentsListPageState extends State<StudentsListPage> {
@@ -24,7 +26,7 @@ class _StudentsListPageState extends State<StudentsListPage> {
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Öğenciler"),
+        title: const Text("Öğrenciler"),
       ),
       body: ListView(
           children: [

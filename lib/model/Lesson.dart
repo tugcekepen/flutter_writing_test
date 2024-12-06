@@ -1,12 +1,12 @@
 // ignore_for_file: file_names
 
-class Lesson{
+class Lesson {
   late String _name;
   late int _credit;
   late double _firstExamPoint;
   late double _secondExamPoint;
 
-  Lesson(){
+  Lesson() {
     _name = "--";
     _credit = 0;
     _firstExamPoint = 0.0;
@@ -22,45 +22,46 @@ class Lesson{
 
   String get name => _name;
 
-  set name(String value){
-    if(value.length >= 2){
+  set name(String value) {
+    if (value.length >= 2) {
       _name = value;
     } else {
-      throw ArgumentError('Ders adı en az 2 karakter olmalıdır.');
+      throw ArgumentError('Ders adı en az 2 karakter olmalıdır!');
     }
   }
 
   int get credit => _credit;
 
-  set credit(int value){
-    if(value>0){
+  set credit(int value) {
+    if (value > 0) {
       _credit = value;
     } else {
-      throw ArgumentError('Geçersiz kredi değeri.');
+      throw ArgumentError('Geçersiz kredi değeri!');
     }
   }
 
   double get firstExamPoint => _firstExamPoint;
 
-  set firstExamPoint(double value){
-    if(value>=0 && value<=100){
+  set firstExamPoint(double value) {
+    if (value >= 0 && value <= 100) {
       _firstExamPoint = value;
     } else {
-      throw ArgumentError('Geçersiz sınav puanı.');
+      throw ArgumentError('Geçersiz sınav puanı!');
     }
   }
 
   double get secondExamPoint => _secondExamPoint;
 
-  set secondExamPoint(double value){
-    if(value>=0 && value<=100){
+  set secondExamPoint(double value) {
+    if (value >= 0 && value <= 100) {
       _secondExamPoint = value;
     } else {
-      throw ArgumentError('Geçersiz sınav puanı.');
+      throw ArgumentError('Geçersiz sınav puanı!');
     }
   }
 
-  double get point => _firstExamPoint*0.4 + _secondExamPoint*0.6;
+  double get point => _firstExamPoint * 0.4 + _secondExamPoint * 0.6;
 
-  String get lessonInfo => "Ders adı: $_name, Kredi: $_credit, 1. Sınav: $_firstExamPoint, 2. Sınav: $_secondExamPoint, Ortalama: ${point.toStringAsFixed(2)}";
+  String get lessonInfo =>
+      "Ders adı: $_name, Kredi: $_credit, 1. Sınav: $_firstExamPoint, 2. Sınav: $_secondExamPoint, Ortalama: ${point.toStringAsFixed(2)}";
 }

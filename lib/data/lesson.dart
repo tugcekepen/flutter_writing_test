@@ -2,7 +2,7 @@ import 'package:writing_test/model/Lesson.dart';
 
 Lesson yapayZeka = Lesson.withName('Yapay Zeka');
 Lesson veriYapilari = Lesson.withName('Veri Yapıları');
-Lesson algoritma = Lesson.withName('Algoritma');
+Lesson algoritma = Lesson.withName('Algoritmalar');
 Lesson programlama = Lesson.withName('Programlama');
 Lesson veritabani = Lesson.withName('Veritabanı');
 Lesson webProgramlama = Lesson.withName('Web Programlama');

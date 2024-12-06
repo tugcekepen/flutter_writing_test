@@ -6,7 +6,9 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() {
+    return _HomePageState();
+  }
 }
 
 class _HomePageState extends State<HomePage> {
@@ -69,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                child: const Text("Öğenciler")),
+                child: const Text("Öğrenciler")),
             TextButton(
                 onPressed: () {
                   Navigator.push(

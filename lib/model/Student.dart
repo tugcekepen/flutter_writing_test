@@ -39,11 +39,13 @@ class Student {
   String get studentInfo =>
       'Adı: $name\nSoyadı: $surname\nOkul Adı: ${school.name}\nEğitim Düzeyi: $degree\nSınıfı: $schoolClass\nGano: $gano';
 
-  String get studentSchoolInfo => 'Okul Adı: ${school.name}\nEğitim Düzeyi: $degree\nSınıfı: $schoolClass';
+  String get studentSchoolInfo =>
+      'Okul Adı: ${school.name}\nEğitim Düzeyi: $degree\nSınıfı: $schoolClass';
 
   int get lessonCount => lessons.length;
 
-  int get totalCredit => lessons.map((lesson) => lesson.credit).reduce((a, b) => a + b);
+  int get totalCredit =>
+      lessons.map((lesson) => lesson.credit).reduce((a, b) => a + b);
 
   int get gano => _calculateGano();
 
@@ -65,7 +67,7 @@ class Student {
       lessons = value;
       _calculateGano();
     } else {
-      throw ArgumentError('Ders sayısı 10\'dan fazla olamaz.');
+      throw ArgumentError('Ders sayısı 10\'dan fazla olamaz!');
     }
   }
 
@@ -75,16 +77,18 @@ class Student {
       _calculateGano();
       return lessons;
     } else {
-      throw ArgumentError('Ders sayısı 10\'u geçemez.');
+      throw ArgumentError('Ders sayısı 10\'u geçemez!');
     }
   }
 
   List<Lesson> removeLesson(Lesson lesson) {
-    if(lessons.isEmpty) {
-      throw ArgumentError('Öğrencinin dersi bulunmamaktadır. Ders çıkarılamaz.');
+    if (lessons.isEmpty) {
+      throw ArgumentError(
+          'Öğrencinin dersi bulunmamaktadır. Ders çıkarılamaz!');
     }
     if (!lessons.contains(lesson)) {
-      throw ArgumentError('Öğrencinin bu dersi bulunmamaktadır. Ders çıkarılamaz.');
+      throw ArgumentError(
+          'Öğrencinin bu dersi bulunmamaktadır. Ders çıkarılamaz!');
     }
     lessons.remove(lesson);
     _calculateGano();
@@ -98,5 +102,10 @@ class Student {
       }
     }
     return schoolClass;
+  }
+
+  @override
+  String toString() {
+    return '$name $surname';
   }
 }
